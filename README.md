@@ -9,7 +9,7 @@ This repository inherits code supplementary to the publication:
 
 Data and main functions: 
 
-**m1_1 - m24_1**: datasets as ".csv" representing meta studies used within the study
+*m1_1 - m24_1*: datasets as ".csv" representing meta studies used within the study
 
 `artidata.R`: [..] creates simulated artificial meta-analyses combining prototypical response~stressor relationships with (normally distributed) random fluctuations reflecting natural variability [...]
 
