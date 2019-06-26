@@ -11,6 +11,8 @@ Data and main functions:
 
 *m1_1 - m24_1*: datasets as ".csv" representing meta studies used within the study
 
+*mall*: combined and scaled meta studies m1_1 - m24_1
+
 `artidata.R`: [..] creates simulated artificial meta-analyses combining prototypical response~stressor relationships with (normally distributed) random fluctuations reflecting natural variability [...]
 
 `meta_pvalues.R`: performs the three tests (Hartigan's dip (HD), Kullback-Leibler divergence (KL), weighted quantile ratio (QR)) to find anomalies in the data indicating thresholds. For details see publication and code file. 
