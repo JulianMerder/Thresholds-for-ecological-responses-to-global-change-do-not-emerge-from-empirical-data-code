@@ -38,7 +38,7 @@ meta_pvalues(points=Data,NP=100,reporting="yes",tbw=2.5)*
 - reporting: should results be printed?
 - tbw: multiplicator for bandwith adjustment in kernel density estimation
 
-`meta_estimates.R`: calculates quantiles based on a gaussian kernel density estimation.
+`meta_estimate.R`: calculates quantiles based on a gaussian kernel density estimation.
 - points: a dataframe or matrix with two columns, where the first represents the explanatory variable (X), the second the response (LRR)
 - qu: a vector of quantiles you want to calculate. Note: should not be far below 5 % or far above 95% as for these cases the algorithm might not converge
 - tbw: a tuning factor for the bandwidth in kernel density estimations
