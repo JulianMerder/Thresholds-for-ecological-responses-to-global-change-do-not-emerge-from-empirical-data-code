@@ -60,5 +60,5 @@ meta_pvalues(points=Data,NP=100,reporting="yes",tbw=2.5)*
 - name_blue .._cyan.._darkblue.._green: give names for point levels
 
 
-(all other functions within this repository are subroutines of the functions shown above for a better traceability of the code structure and comprehension of the algorithm)
+(all other functions within this repository are subroutines of the functions shown above for a better traceability of the code structure and eased comprehension of the algorithm)
 
