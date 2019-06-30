@@ -1,10 +1,13 @@
 # Ecological responses to global change are rarely characterized by thresholds (code)
 
+**Code written by: Jan A. Freund & Julian Merder**
+
 This repository inherits code supplementary to the publication:
 
 **"Ecological responses to global change are rarely characterized by thresholds"**
 
 *Authors:  Helmut Hillebrand, Ian Donohue, W. Stanley Harpole, Dorothee Hodapp, Michal Kucera , Aleksandra M. Lewandowska, Julian Merder, Jose M. Montoya, Jan A. Freund*
+
 
 
 Data and main functions: 
