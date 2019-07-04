@@ -21,8 +21,8 @@ Data and main functions:
 *example: 
 artidata(set=0,np=150,isnr=0.5,r="n",plot="y")*
 
-  - set:  type of dataset (0: sn bifurcation=default, 1: neutral, 2: gradual, 3: strict threshold
-                         4: variable threshold, 5: thresh. & intermed., 6: var.threshold + var.response 7: plain trend)
+  - set:  type of dataset (1: sn bifurcation=default, 2: neutral, 3: plain trend, 4: gradual, 5: strict threshold
+                         6: variable threshold, 7: thresh. & intermed., 8: var.threshold + var.response )
   - np:   number of data points (default=1000)
   - isnr: inverse snr = 1/snr = noise-to-signal ratio (nsr) (default: 0)
   - r:    "n" (normal distribution=default) OR 'u'  (uniform distribution) of stressor samples
