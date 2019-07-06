@@ -7,19 +7,19 @@ This repository inherits code supplementary to the publication:
 *Authors:  Helmut Hillebrand, Ian Donohue, W. Stanley Harpole, Dorothee Hodapp, Michal Kucera , Aleksandra M. Lewandowska, Julian Merder, Jose M. Montoya, Jan A. Freund*
 
 
-**Data (assembled by Helmut Hillebrand):
+**Data (assembled by Helmut Hillebrand):**
 
 *m1_1 - m24_1*: datasets as ".csv" representing meta studies used within the study
 
 *mall*: combined and scaled meta studies m1_1 - m24_1
 
 
-**Code (written by Jan A. Freund & Julian Merder):
-**main R scripts
+**Code (written by Jan A. Freund & Julian Merder):**
+**main R scripts**
 
 `artidata.R`: Creates synthetic meta-analysis data combining prototypical response~stressor relationships with random fluctuations reflecting natural variability.
 
-*example: artidata(set=1, np=150, isnr=0.5, r="n", plot="y")
+*example: artidata(set=1, np=150, isnr=0.5, r="n", plot="y")*
 
   - set:  type of dataset (1: sn bifurcation=default, 2: neutral, 3: plain trend, 4: gradual, 5: strict threshold
                          6: variable threshold, 7: thresh. & intermed., 8: var.threshold + var.response )
@@ -43,7 +43,7 @@ meta_pvalues(points=Data,NP=100,reporting="y",tbw=2.5)*
 
 `meta_estimate.R`: Calculates quantiles based on a Gaussian kernel density estimation.
 
-*example: meta_estimate(points, qu=c(0.25,0.5,0.75),tbw=2.5,weights=1)
+*example: meta_estimate(points, qu=c(0.25,0.5,0.75),tbw=2.5,weights=1)*
 
 - points: a dataframe or matrix with two columns, where the first represents the explanatory variable (X), the second the response (LRR)
 - qu: a vector of quantiles you want to calculate (default c(0.25,0.5,0.75))
@@ -55,7 +55,7 @@ Note: should not be far below 5 % or far above 95% as for these cases the algori
 
 `meta_plot.R`: plots all quantile lines and marginal densities together with original data points (point size scaled by weight, point color by habitat)
 
-*example: meta_plot( Data=meta_pvalues( artidata()), ... )
+*example: meta_plot( Data=meta_pvalues( artidata()), ... )*
 
 - Data: list similar to result of meta_pvalues()
 - show: for the original data use 'original' (default); for the last permuted surrogate use 'surrogate'
@@ -69,7 +69,7 @@ Note: should not be far below 5 % or far above 95% as for these cases the algori
 - name_(blue/cyan/darkblue/green): four names assigned to four colors in plot legend (four strings)
 
 
-**All other R scripts in this repository are subroutines called by the above main routines
+**All other R scripts in this repository are subroutines called by the above main routines**
 
 The following R packages must be installed: 
 	plotly, dplyr, diptest, spatstat
