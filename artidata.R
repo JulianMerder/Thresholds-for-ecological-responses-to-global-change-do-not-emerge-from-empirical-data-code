@@ -1,14 +1,14 @@
 artidata <- function(set="e", np=150, isnr=0, r="n", p="y"){
   # set:  type of dataset:
-                           #a: simple null (no trend, no divergence of variance),
-                           #b: neutral (bimodal but independent),
-                           #c: plain trend (proportionate response), 
-                           #d: gradual trend (diverging variance),
-                           #e: saddle node bifurcation=default, 
-                           #f: strict threshold
-                           #g: variable threshold, 
-                           #h: thresh. & intermed., 
-                           #i: var.threshold + var.response
+                           # "a" = simple null (no trend, no divergence of variance),
+                           # "b" = neutral (bimodal but independent),
+                           # "c" = plain trend (proportionate response), 
+                           # "d" = gradual trend (diverging variance),
+                           # "e" = saddle node bifurcation=default, 
+                           # "f" = strict threshold
+                           # "g" = variable threshold, 
+                           # "h" = thresh. & intermed., 
+                           # "i" = var.threshold + var.response
   
   # np:   number of data points (default=150)
   # isnr: inverse snr = 1/snr = noise-to-signal ratio (nsr) (default: 0)
