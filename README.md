@@ -21,8 +21,15 @@ This repository inherits code supplementary to the publication:
 
 *example: artidata(set=1, np=150, isnr=0.5, r="n", plot="y")*
 
-  - set:  type of dataset (1: sn bifurcation=default, 2: neutral, 3: plain trend, 4: gradual, 5: strict threshold
-                         6: variable threshold, 7: thresh. & intermed., 8: var.threshold + var.response )
+  - set:  type of dataset: "a" = simple null (no trend, no divergence of variance),
+                           "b" = neutral (bimodal but independent),
+                           "c" = plain trend (proportionate response), 
+                           "d" = gradual trend (diverging variance),
+                           "e" = saddle node bifurcation=default, 
+                           "f" = strict threshold
+                           "g" = variable threshold, 
+                           "h" = thresh. & intermed., 
+                           "i" = var.threshold + var.response
   - np:   number of data points (default=150)
   - isnr: inverse snr = 1/snr = noise-to-signal ratio (nsr) (default: 0)
   - r:    "n" (normal distribution=default) OR 'u'  (uniform distribution) of stressor samples
