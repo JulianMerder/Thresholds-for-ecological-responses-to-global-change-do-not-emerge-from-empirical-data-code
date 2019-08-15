@@ -1,15 +1,108 @@
-artidata <- function(set=1, np=150, isnr=0, r="n", p="y"){
-  # set:  type of dataset (1: sn bifurcation=default, 2: neutral, 3: plain trend, 4: gradual,  5: strict threshold
-  #                        6: variable threshold, 7: thresh. & intermed., 8: var.threshold + var.response)
+artidata <- function(set="e", np=150, isnr=0, r="n", p="y"){
+  # set:  type of dataset:
+                           a: simple null (no trend, no divergence of variance),
+                           b: neutral (bimodal but independent),
+                           c: plain trend (proportionate response), 
+                           d: gradual trend (diverging variance),
+                           e: saddle node bifurcation=default, 
+                           f: strict threshold
+                           g: variable threshold, 
+                           h: thresh. & intermed., 
+                           i: var.threshold + var.response
+  
   # np:   number of data points (default=150)
   # isnr: inverse snr = 1/snr = noise-to-signal ratio (nsr) (default: 0)
   # r:    "n" (normal distribution=default) OR 'u'  (uniform distribution) of stressor samples
   # p:    produce a plot: "y" (yes=default), "n" (no)
+  
   #
   ##################################################################################################################################
-  # 1: sn bifurcation
+  # a: simple null (no trend, no divergence of variance) 
   ##################################################################################################################################
-  if(set==1){
+  if(set=="a"){
+    #g: gap (response difference between upper and lower level )
+    #w: width (of the stressor range)
+    #v: var of norm. noise (N(0,v))
+    g  <- 1
+    w  <- 1
+    v  <- isnr*g^2/2
+    x0 <- seq(-w,w, length.out=200)
+    y0 <- rep(0,length(x0))
+    if (r=='u')
+    {x <- runif(np,min=-w/2,max=w/2)}               # select np equidistributed sample of x values
+    else
+    {x <- rnorm(np, mean = 0, sd = w/6)}            # select np normally distributed sample of x values
+    rand <- runif(np) 
+    y  <- rnorm(length(x),sd=sqrt(v))
+  }
+  #
+  
+  ##################################################################################################################################
+  # b: neutral (bimodal but independent) 
+  ##################################################################################################################################
+  if(set=="b"){
+    #g: gap (response difference between upper and lower level )
+    #w: width (of the stressor range)
+    #v: var of norm. noise (N(0,v))
+    g  <- 1
+    w  <- 1
+    v  <- isnr*g^2/2
+    x0 <- seq(-w,w, length.out=200)
+    y0 <- cbind(rep(-g/2,length(x0)),rep(+g/2,length(x0)))
+    if (r=='u')
+    {x <- runif(np,min=-w/2,max=w/2)}               # select np equidistributed sample of x values
+    else
+    {x <- rnorm(np, mean = 0, sd = w/6)}            # select np normally distributed sample of x values
+    rand <- runif(np) 
+    y  <- -0.5*g + (rand>0.5)*g + rnorm(length(x),sd=sqrt(v))
+  }
+  
+  ##################################################################################################################################
+  # c: plain trend (proportionate response)
+  ##################################################################################################################################
+  if(set=="c"){
+    #g: gap (response difference between upper and lower level )
+    #w: width (of the stressor range)
+    #v: var of norm. noise (N(0,v))
+    g  <- 1
+    w  <- 1
+    v  <- isnr*g^2/2
+    x0 <- seq(-1,1,len=1000)
+    y0 <- x0
+    if (r=='u')
+    {x <- runif(np,min=-w/2,max=w/2)}               # select np equidistributed sample of x values
+    else
+    {x <- rnorm(np, mean = 0, sd = w/6)}            # select np normally distributed sample of x values
+    y <- x + rnorm(np,sd=sqrt(v))
+  }
+  #
+  ##################################################################################################################################
+  # d: gradual trend (diverging variance)
+  ##################################################################################################################################
+  if(set=="d"){
+    #g: gap (response difference between upper and lower level )
+    #w: width (of the stressor range)
+    #v: var of norm. noise (N(0,v))
+    g  <- 1
+    w  <- 1
+    v  <- isnr*g^2/2
+    alpha <- 1/2
+    beta <- 2
+    a <- 2^alpha/(3^alpha-1)
+    x0 <- seq(-w,w, length.out=200)
+    y0 <- a*((1+x0)^alpha-1)
+    if (r=='u')
+    {x <- runif(np,min=-w/2,max=w/2)}               # select np equidistributed sample of x values
+    else
+    {x <- rnorm(np, mean = 0, sd = w/6)}            # select np normally distributed sample of x values
+    y <- a*((1+x)^alpha-1) + sqrt(v)*(1+x)^beta * rnorm(length(x))
+  }
+  #
+  
+  ##################################################################################################################################
+  # e: saddle node bifurcation=default,
+  ##################################################################################################################################
+  if(set=="e"){
     #c: centre (reponse value halfway between tipping points)
     #g: gap (response difference between tipping points)
     #w: width (of the bistable regime)
@@ -49,70 +142,9 @@ artidata <- function(set=1, np=150, isnr=0, r="n", p="y"){
   }
   #
   ##################################################################################################################################
-  # 2: neutral  
+  # f: strict threshold
   ##################################################################################################################################
-  if(set==2){
-    #g: gap (response difference between upper and lower level )
-    #w: width (of the stressor range)
-    #v: var of norm. noise (N(0,v))
-    g  <- 1
-    w  <- 1
-    v  <- isnr*g^2/2
-    x0 <- seq(-w,w, length.out=200)
-    y0 <- cbind(rep(-g/2,length(x0)),rep(+g/2,length(x0)))
-    if (r=='u')
-    {x <- runif(np,min=-w/2,max=w/2)}               # select np equidistributed sample of x values
-    else
-    {x <- rnorm(np, mean = 0, sd = w/6)}            # select np normally distributed sample of x values
-    rand <- runif(np) 
-    y  <- -0.5*g + (rand>0.5)*g + rnorm(length(x),sd=sqrt(v))
-  }
-  
-  ##################################################################################################################################
-  # 3: plain trend (proportionate response)
-  ##################################################################################################################################
-  if(set==3){
-    #g: gap (response difference between upper and lower level )
-    #w: width (of the stressor range)
-    #v: var of norm. noise (N(0,v))
-    g  <- 1
-    w  <- 1
-    v  <- isnr*g^2/2
-    x0 <- seq(-1,1,len=1000)
-    y0 <- x0
-    if (r=='u')
-    {x <- runif(np,min=-w/2,max=w/2)}               # select np equidistributed sample of x values
-    else
-    {x <- rnorm(np, mean = 0, sd = w/6)}            # select np normally distributed sample of x values
-    y <- x + rnorm(np,sd=sqrt(v))
-  }
-  #
-  ##################################################################################################################################
-  # 4: gradual
-  ##################################################################################################################################
-  if(set==4){
-    #g: gap (response difference between upper and lower level )
-    #w: width (of the stressor range)
-    #v: var of norm. noise (N(0,v))
-    g  <- 1
-    w  <- 1
-    v  <- isnr*g^2/2
-    alpha <- 1/2
-    beta <- 2
-    a <- 2^alpha/(3^alpha-1)
-    x0 <- seq(-w,w, length.out=200)
-    y0 <- a*((1+x0)^alpha-1)
-    if (r=='u')
-    {x <- runif(np,min=-w/2,max=w/2)}               # select np equidistributed sample of x values
-    else
-    {x <- rnorm(np, mean = 0, sd = w/6)}            # select np normally distributed sample of x values
-    y <- a*((1+x)^alpha-1) + sqrt(v)*(1+x)^beta * rnorm(length(x))
-  }
-  #
-  ##################################################################################################################################
-  # 5: strict threshold
-  ##################################################################################################################################
-  if(set==5){
+  if(set=="f"){
     #g: gap (response difference between upper and lower level )
     #w: width (of the stressor range)
     #v: var of norm. noise (N(0,v))
@@ -133,9 +165,9 @@ artidata <- function(set=1, np=150, isnr=0, r="n", p="y"){
   }
   #
   ##################################################################################################################################
-  # 6: variable thrreshold
+  # g: variable thrreshold
   ##################################################################################################################################
-  if(set==6){
+  if(set=="g"){
     #g: gap (response difference between upper and lower level )
     #w: width (of the stressor range)
     #v: var of norm. noise (N(0,v))
@@ -157,9 +189,9 @@ artidata <- function(set=1, np=150, isnr=0, r="n", p="y"){
   }
   #
   ##################################################################################################################################
-  # 7: threshold & intermediate
+  # h: threshold & intermediate
   ##################################################################################################################################
-  if(set==7){
+  if(set=="h"){
     #g: gap (response difference between upper and lower level )
     #w: width (of the stressor range)
     #v: var of norm. noise (N(0,v))
@@ -189,9 +221,9 @@ artidata <- function(set=1, np=150, isnr=0, r="n", p="y"){
   }
   #
   ##################################################################################################################################
-  # 8: variable threshold & variable response
+  # i: variable threshold & variable response
   ##################################################################################################################################
-  if(set==8){
+  if(set=="i"){
     #g: gap (response difference between upper and lower level )
     #w: width (of the stressor range)
     #v: var of norm. noise (N(0,v))
