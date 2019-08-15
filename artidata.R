@@ -1,14 +1,14 @@
 artidata <- function(set="e", np=150, isnr=0, r="n", p="y"){
   # set:  type of dataset:
-                           a: simple null (no trend, no divergence of variance),
-                           b: neutral (bimodal but independent),
-                           c: plain trend (proportionate response), 
-                           d: gradual trend (diverging variance),
-                           e: saddle node bifurcation=default, 
-                           f: strict threshold
-                           g: variable threshold, 
-                           h: thresh. & intermed., 
-                           i: var.threshold + var.response
+                           #a: simple null (no trend, no divergence of variance),
+                           #b: neutral (bimodal but independent),
+                           #c: plain trend (proportionate response), 
+                           #d: gradual trend (diverging variance),
+                           #e: saddle node bifurcation=default, 
+                           #f: strict threshold
+                           #g: variable threshold, 
+                           #h: thresh. & intermed., 
+                           #i: var.threshold + var.response
   
   # np:   number of data points (default=150)
   # isnr: inverse snr = 1/snr = noise-to-signal ratio (nsr) (default: 0)
@@ -20,12 +20,12 @@ artidata <- function(set="e", np=150, isnr=0, r="n", p="y"){
   # a: simple null (no trend, no divergence of variance) 
   ##################################################################################################################################
   if(set=="a"){
-    #g: gap (response difference between upper and lower level )
+    
     #w: width (of the stressor range)
     #v: var of norm. noise (N(0,v))
-    g  <- 1
+    
     w  <- 1
-    v  <- isnr*g^2/2
+    v  <- isnr^2/2
     x0 <- seq(-w,w, length.out=200)
     y0 <- rep(0,length(x0))
     if (r=='u')
