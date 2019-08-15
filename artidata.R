@@ -34,6 +34,7 @@ artidata <- function(set="e", np=150, isnr=0, r="n", p="y"){
     {x <- rnorm(np, mean = 0, sd = w/6)}            # select np normally distributed sample of x values
     rand <- runif(np) 
     y  <- rnorm(length(x),sd=sqrt(v))
+    g<-1                                            #g: for plot window
   }
   #
   
