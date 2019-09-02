@@ -9,21 +9,17 @@ artidata <- function(set="e", np=150, isnr=0, r="n", p="y"){
                            # "g" = variable threshold, 
                            # "h" = thresh. & intermed., 
                            # "i" = var.threshold + var.response
-  
   # np:   number of data points (default=150)
   # isnr: inverse snr = 1/snr = noise-to-signal ratio (nsr) (default: 0)
   # r:    "n" (normal distribution=default) OR 'u'  (uniform distribution) of stressor samples
   # p:    produce a plot: "y" (yes=default), "n" (no)
-  
   #
   ##################################################################################################################################
   # a: simple null (no trend, no divergence of variance) 
   ##################################################################################################################################
   if(set=="a"){
-    
     #w: width (of the stressor range)
     #v: var of norm. noise (N(0,v))
-    
     w  <- 1
     v  <- isnr^2/2
     x0 <- seq(-w,w, length.out=200)
@@ -37,7 +33,6 @@ artidata <- function(set="e", np=150, isnr=0, r="n", p="y"){
     g<-1                                            #g: for plot window
   }
   #
-  
   ##################################################################################################################################
   # b: neutral (bimodal but independent) 
   ##################################################################################################################################
@@ -57,7 +52,7 @@ artidata <- function(set="e", np=150, isnr=0, r="n", p="y"){
     rand <- runif(np) 
     y  <- -0.5*g + (rand>0.5)*g + rnorm(length(x),sd=sqrt(v))
   }
-  
+  #
   ##################################################################################################################################
   # c: plain trend (proportionate response)
   ##################################################################################################################################
@@ -99,7 +94,6 @@ artidata <- function(set="e", np=150, isnr=0, r="n", p="y"){
     y <- a*((1+x)^alpha-1) + sqrt(v)*(1+x)^beta * rnorm(length(x))
   }
   #
-  
   ##################################################################################################################################
   # e: saddle node bifurcation=default,
   ##################################################################################################################################
