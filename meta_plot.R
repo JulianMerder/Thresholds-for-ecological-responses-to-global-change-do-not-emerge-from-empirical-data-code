@@ -23,13 +23,15 @@ meta_plot<-function(Data,show="original",pointsize=7,weights=TRUE,title="title",
   if(show=="surrogate"){KK<-Data$surrogate}
   else{KK<-Data$original}
   
-  if(isTRUE(weights)){
+   if(isTRUE(weights)){
     #pointsize<-sqrt(((Data$var.LRR-min(Data$var.LRR,na.rm=T))/(max(Data$var.LRR,na.rm=T)-min(Data$var.LRR,na.rm=T)))*72+49)
     KK$points<-KK$points %>%
       mutate(statweight = ntile(statweight, 5))%>%as.data.frame()
     pointsize<-KK$points$statweight+3
     pointsize[is.na(pointsize)]<-3
     
+  }else{
+    pointsize<-rep(pointsize,length(KK$points$col))
   }
   
   
@@ -52,25 +54,30 @@ meta_plot<-function(Data,show="original",pointsize=7,weights=TRUE,title="title",
       
       add_trace(x = KK$grid$gx,y =b, type = 'scatter', mode = 'lines',
                 fill = 'tonexty', fillcolor='rgba(255,0,0,0.2)', line = list(color = 'rgba(255,0,0,1)'),
-                showlegend = showleg, name = 'upper quantile',legendgroup=legendgr[4])  %>%
-      
-      add_trace(x= KK$points$X[as.character(KK$points$col)=="blue"],y = KK$points$LRR[as.character(KK$points$col)=="blue"], type="scatter",mode = "markers",
+                showlegend = showleg, name = 'upper quantile',legendgroup=legendgr[4])  
+      if(any(as.character(KK$points$col)=="blue")){
+      p1<-p1 %>% add_trace(x= KK$points$X[as.character(KK$points$col)=="blue"],y = KK$points$LRR[as.character(KK$points$col)=="blue"], type="scatter",mode = "markers",
                 marker = list(size = pointsize[as.character(KK$points$col)=="blue"],color = 'rgba(0, 0, 255, .5)',line = list(color = 'rgba(0, 0, 255, .8)',
-                                                                                         width = 2)),showlegend = showleg, name = name_blue,legendgroup=legendgr[7]) %>%
-      
-      add_trace(x= KK$points$X[as.character(KK$points$col)=="darkgreen"],y = KK$points$LRR[as.character(KK$points$col)=="darkgreen"], type="scatter",mode = "markers",
+                                                                                         width = 2)),showlegend = showleg, name = name_blue,legendgroup=legendgr[7]) 
+      }
+    if(any(as.character(KK$points$col)=="darkgreen")){
+     p1<- p1 %>% add_trace(x= KK$points$X[as.character(KK$points$col)=="darkgreen"],y = KK$points$LRR[as.character(KK$points$col)=="darkgreen"], type="scatter",mode = "markers",
                 marker = list(size = pointsize[as.character(KK$points$col)=="darkgreen"],color = 'rgba(0, 100, 0, .5)',line = list(color = 'rgba(0, 100, 0, .8)',
-                                                                                         width = 2)),showlegend = showleg, name = name_green,legendgroup=legendgr[8]) %>%
-      
-      add_trace(x= KK$points$X[as.character(KK$points$col)=="darkblue"],y = KK$points$LRR[as.character(KK$points$col)=="darkblue"], type="scatter",mode = "markers",
+                                                                                         width = 2)),showlegend = showleg, name = name_green,legendgroup=legendgr[8]) 
+    }
+    
+    if(any(as.character(KK$points$col)=="darkblue")){
+     p1<- p1 %>% add_trace(x= KK$points$X[as.character(KK$points$col)=="darkblue"],y = KK$points$LRR[as.character(KK$points$col)=="darkblue"], type="scatter",mode = "markers",
                 marker = list(size = pointsize[as.character(KK$points$col)=="darkblue"],color = 'rgba(0, 0, 139, 0.5)',line = list(color = 'rgba(0, 0, 139, 0.8)',
-                                                                                          width = 2)),showlegend = showleg, name = name_darkblue,legendgroup=legendgr[9]) %>%
-      
-      add_trace(x= KK$points$X[as.character(KK$points$col)=="darkcyan"],y = KK$points$LRR[as.character(KK$points$col)=="darkcyan"], type="scatter",mode = "markers",
+                                                                                          width = 2)),showlegend = showleg, name = name_darkblue,legendgroup=legendgr[9]) 
+    }
+    if(any(as.character(KK$points$col)=="darkcyan")){
+      p1<-p1 %>% add_trace(x= KK$points$X[as.character(KK$points$col)=="darkcyan"],y = KK$points$LRR[as.character(KK$points$col)=="darkcyan"], type="scatter",mode = "markers",
                 marker = list(size = pointsize[as.character(KK$points$col)=="darkcyan"],color = 'rgba(0, 139, 139, 0.5)',line = list(color = 'rgba(0, 139, 139, 0.8)',
-                                                                                            width = 2)),showlegend = showleg, name = name_cyan,legendgroup=legendgr[10]) %>%
-      
-      add_trace(x = KK$points$X,y = rep(median(KK$points$LRR,na.rm=T),length(KK$points$X)), type = 'scatter', mode = 'lines',
+                                                                                            width = 2)),showlegend = showleg, name = name_cyan,legendgroup=legendgr[10]) 
+    }
+    
+     p1<- p1%>% add_trace(x = KK$points$X,y = rep(median(KK$points$LRR,na.rm=T),length(KK$points$X)), type = 'scatter', mode = 'lines',
                 line = list(dash="dot",color = 'rgba(0,0,255,1)'),
                 showlegend = showleg, name = 'median marginal',legendgroup=legendgr[5]) %>%
       add_trace(x = KK$grid$gx,y = c, type = 'scatter', mode = 'lines',
