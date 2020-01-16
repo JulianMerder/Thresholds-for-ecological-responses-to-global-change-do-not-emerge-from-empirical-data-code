@@ -14,6 +14,7 @@ artidata <- function(set="e", np=150, isnr=0, r="n", p="y"){
   # r:    "n" (normal distribution=default) OR 'u'  (uniform distribution) of stressor samples
   # p:    produce a plot: "y" (yes=default), "n" (no)
   #
+  if(!any(set == c("a","b","c","d","e","f","g","h","i"))){stop("select a set between 'a' and 'i'")}
   ##################################################################################################################################
   # a: simple null (no trend, no divergence of variance) 
   ##################################################################################################################################
