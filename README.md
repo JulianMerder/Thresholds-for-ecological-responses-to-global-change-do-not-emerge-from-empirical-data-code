@@ -1,8 +1,8 @@
-# Thresholds-for-ecological-responses-to-global-change-do-not-emerge-from-empirical-data-code
+# Thresholds for ecological responses to global change do not emerge from empirical data: code
 
 This repository inherits code supplementary to the publication:
 
-**"Thresholds-for-ecological-responses-to-global-change-do-not-emerge-from-empirical-data-code"**
+**"Thresholds for ecological responses to global change do not emerge from empirical data code"**
 
 *Authors:  Helmut Hillebrand, Ian Donohue, W. Stanley Harpole, Dorothee Hodapp, Michal Kucera , Aleksandra M. Lewandowska, Julian Merder, Jose M. Montoya, Jan A. Freund*
 
